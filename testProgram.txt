@@ -1,0 +1,288 @@
+// CalcLang does not support variables, it only has a "total" value, like a calculator
+// Therefore, you may preform operations on the total value, but you cannot store it
+// You can think of the total array as the calculator's history
+
+// Every keyword and value must be separated by a space
+
+// New lines are NOT required; however, in the case of keywords FOR and IF,
+// the parameters must be on the same line following the keyword
+
+
+// ----------------------
+// Chapter 1: Basic Math
+// ----------------------
+
+
+// Example 1a: Setting and Printing a Variable
+
+// We place the value 100 into the total array
+100 
+
+// PRINT, CLEAR, and PRINTLN are all keywords
+// PRINT will print the most recent value in the total, in this case 100
+PRINT 
+
+// CLEAR will clear the total array, setting our total to []. This is the same as clearing your calculator history
+CLEAR 
+
+// PRINTLN will print a new line in the console
+PRINTLN
+
+
+
+// Example 1b: Preforming and Operation
+
+// First we enter 100 as a value, this is sent to the total array
+100
+
+// Next we declare the operation we want to preform 
+*
+
+// Now we want to state the value we will be applied to the total
+0.122
+
+// After 0.122 is entered, the operation is preformed and the result is stored in the total array
+// Our total array will now be [100, 0.122, 12.2] with our result being 12.2
+// PRINT, CLEAR, PRINTLN, and MEMCLEAR are all keywords
+// PRINT will print the most recent value in the total array, in this case is our result 12.2
+PRINT 
+
+// CLEAR will clear the total array, setting our total to []. This is the same as clearing your calculator history
+CLEAR 
+
+// PRINTLN will print a new line in the console
+PRINTLN
+
+// MEMCLEAR is similar to CLEAR, but it will clear the condition (Will be covered later) and will also reset the operator, so the next value entered will not have multiplication applied to it
+MEMCLEAR
+
+
+
+// ----------------------
+// Chapter 2: Commenting
+// ----------------------
+
+
+// As seen above, comments are denoted by two forward slashes in part of the line
+
+// This is a comment
+This is also a comment //
+So is // this
+// The following is not an example of how to do a comment - This is// NOT a comment 
+// The above does not work because // is connected to 'is'
+
+
+// ----------------------
+// Chapter 3: Operation Precedence
+// ----------------------
+
+
+// This statement will print 4, then 6
+// The most recent operation will stand
+// Because the last used operation was +, the next value will then be added to the total
+// If the operation was *, the next value would be multiplied by the total
+// et cetera
+2 + 2
+PRINT
+PRINTLN
+2
+PRINT
+PRINTLN
+MEMCLEAR
+
+
+// ----------------------
+// Chapter 4: Printing Characters
+// ----------------------
+
+
+// These following statements will print Hello World
+72
+// The PRINTC keyword will print the ASCII character of the respective value 
+PRINTC CLEAR
+// CLEAR is required above to prevent the previous 72 from being added to 101 below
+101
+PRINTC CLEAR
+108
+// We can use PRINTC twice here to print the same character
+PRINTC
+PRINTC
+// We do not use CLEAR here to show that you can add 3 to 108 to get 111 which is the ASCII value for 'o'
++ 3
+PRINTC
+CLEAR
+32
+PRINTC
+CLEAR
+87
+PRINTC
+CLEAR
+111
+PRINTC
++ 3
+PRINTC
+CLEAR
+108
+PRINTC
+- 8
+PRINTC
+PRINTLN MEMCLEAR
+
+
+// ----------------------
+// Chapter 5: Conditional Statements
+// ----------------------
+
+
+// The = operator will check if the previous 2 values are equal 
+1 = 1 
+IF + 1 PRINT PRINTLN
+// The two values 1 and 1 are placed in the total array giving us [1, 1]
+// The = operator can also be used as shown
+MEMCLEAR
+2 2 =
+IF + 1 PRINT PRINTLN
+CLEAR 
+
+//   NOTICE:
+//      If we were to have an IF statement where the initial total is 0 and we have "+ 1" then if we were to do 1 = 1
+//      it would be checking the logical condition of (2 = 3) which is false.
+//      This is because the operation is still + and the total is 1.
+//      So, you will need to clear the total or act accordingly to the situation 
+
+// The IF keywork will check if the condition is true
+// If it is true, the code following the IF on the SAME LINE will be executed 
+1 = 1
+IF 2 PRINT PRINTLN
+// Will print 0 NOT 2
+// You will have to assign a new operator because the current is = 
+
+// Will correctly print 2 because we assigned the new operator to +
+IF + 2 PRINT PRINTLN
+// the IF keyword will preform the statement following itself on the line
+// if and only if the condition is true
+MEMCLEAR
+
+
+// ----------------------
+// Chapter 6: Loops
+// ----------------------
+
+// The LOOP keyword requires 3 parameters
+// The first is the start value
+// The second is the end value
+// The third is the increment value
+// It acts similar to a for loop in other languages
+//      Ex:
+//      for(int i = START; i <= END; i+=INCREMENT)
+//      {
+//          // Code goes here 
+//      }       
+// For loops where it decrements, it will switch to "i >= END"
+// In this language curly braces are required to designate the start and end of the loop
+
+
+// Example 6a: Looping Through Numbers 1-10
+
+// Loop starting at 1, ending at 10, incrementing by 1
+FOR 1 10 1  
+{
+    // Will add 1 every iteration
+    + 1
+    // Then print that value
+    PRINT
+}
+// Will print 12345678910
+
+PRINTLN
+MEMCLEAR
+
+// Example 6b: Looping Through Characters
+
+// First we will set the total to 64, which is the ASCII value for 'A'
++ 64
+// Then we will loop 26 times printing the next character
+FOR 1 26 1
+{
+    1
+    PRINTC
+}
+MEMCLEAR PRINTLN
+// Will print ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+
+// Example 6c: More Complicated Loops
+
+// We will introduce the INDEX variable
+// This is the only instance of a variable in CalcLang
+// It is the current index of the loop
+FOR 1 10 1
+{
+    // We will clear the array then add the current index and print
+    // We need to clear the array so that the INDEX value is not added to the total each time
+    // Note: The INDEX value is not mutable 
+    CLEAR + INDEX
+    PRINT
+}
+MEMCLEAR PRINTLN
+// Will print 12345678910
+
+// Example 6d: Loops with Conditional Statements
+
+// We can also use loops with conditional statements
+// For example, we will first set the condition true
+1 = 1
+FOR 1 10 1
+{
+    // Now because the condition is true, we will print 10 times
+    IF + 72 PRINTC CLEAR 101 PRINTC CLEAR 108 PRINTC CLEAR 108 PRINTC CLEAR 111 PRINTC CLEAR 32 PRINTC CLEAR
+}
+PRINTLN
+MEMCLEAR
+
+// We can also change the condition in the loop
+FOR 1 10 1
+{
+    CLEAR
+    INDEX = 3
+    // This IF will only be true if the INDEX is 3
+    // We do not need to CLEAR before + 73 because during the "INDEX = 3" statement, there was no arithmetic operation, so only 0 was added to the total
+    IF + 73 PRINTC CLEAR 110 PRINTC CLEAR 100 PRINTC 1 PRINTC CLEAR 120 PRINTC CLEAR 32 PRINTC CLEAR INDEX PRINT CLEAR
+}
+MEMCLEAR PRINTLN
+
+// Example 6e: Decrementing Loops
+
+// Loops can also decrement
+FOR 5 1 -1
+{
+    INDEX = 3
+    IF CLEAR + 33 PRINTC
+} 
+PRINTLN
+MEMCLEAR
+// As a note nested loops are not supported 
+
+
+// ----------------------
+// Chapter 7: Keywords and Operators
+// ----------------------
+
+
+// Operators:
+// + - Addition
+// - - Subtraction
+// * - Multiplication
+// / - Division
+// % - Modulus
+// = - Equality
+
+
+// Keywords:
+// PRINT - Prints the most recent value in the total array
+// PRINTLN - Prints a new line
+// PRINTC - Prints the ASCII character of the most recent value in the total array
+// CLEAR - Clears the total array
+// MEMCLEAR - Clears the total array and resets the operator
+// IF - Checks if the condition is true, if it is, the code following the IF on the same line will be executed
+// FOR - Loops through a range of numbers
