@@ -29,13 +29,13 @@ public class Interpreter {
         this.program = program;
         this.total = new ArrayList<Double>();
         this.condition = false;
-        this.opcode = '+';
+        this.opcode = ' ';
     }
     //Constructor for when program is not given.
     public Interpreter() {
         this.total = new ArrayList<Double>();
         this.condition = false;
-        this.opcode = '+';
+        this.opcode = ' ';
     }
 
     // Load a program into the program variable
@@ -115,6 +115,9 @@ public class Interpreter {
                     break;
                 }
             }
+            if(line[i].equals("PUSH")){
+                opcode = ' ';
+            }
             if(line[i].equals("PRINT")){
                 PRINT();
                 continue;
@@ -181,6 +184,9 @@ public class Interpreter {
                 else if(opcode == '='){
                     condition = Math.abs(total.get(arraySize-2) - total.get(arraySize-1)) < EPLSION;
                     opcode = ' ';
+                }
+                else {
+                    continue;
                 }
                 total.add(result);
             }

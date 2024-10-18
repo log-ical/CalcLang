@@ -101,6 +101,7 @@ MEMCLEAR
 // The PRINTC keyword will print the ASCII character of the respective value 
 PRINTC CLEAR
 // CLEAR is required above to prevent the previous 72 from being added to 101 below
+// PUSH can also be used instead; that will be convered in the next chapter
 101
 PRINTC CLEAR
 108
@@ -130,11 +131,12 @@ PRINTLN MEMCLEAR
 
 
 // ----------------------
-// Chapter 5: Conditional Statements
+// Chapter 5: Conditional Statements and PUSH
 // ----------------------
 
-
+// As a forewarning, the = operator in CalcLang is strange, it is not similar to other languages. 
 // The = operator will check if the previous 2 values are equal 
+
 1 = 1 
 IF + 1 PRINT PRINTLN
 // The two values 1 and 1 are placed in the total array giving us [1, 1]
@@ -163,6 +165,46 @@ IF + 2 PRINT PRINTLN
 // if and only if the condition is true
 MEMCLEAR
 
+// PUSH keyword
+
+// For instances where you wish to insert value(s) into the total array without an operation being applied to them, you can use the PUSH keyword
+// Lets assume we have the following values in the total array: [1, 2, 3, 4]
+// If the current operator is + and we want to add 10 to the total array without it adding 14 to the total array, we can use the PUSH keyword
+PUSH 10 // This will make our total array [1, 2, 3, 4, 10]
+// Alternatively, you can still do, as an example, + 6
+// This can be particularly useful for conditional statements
+// Example:
+// Assume you have the following values in the total array: [2, 4, 6, 8]
+// We want to check if the operation we did resulted in 10
++ 2 = PUSH 10 // This will make our total array [2, 4, 6, 8, 10, 10]
+// The conditional will now check if 10 = 10 which is true
+
+// _______________________
+// The PUSH keyword is intentionally not used in this documentation to demonstrate the unique behavior of the total array and the operators
+// _______________________
+
+// Remember, the equal sign is an operator. When there exists enough values in the total array to preform a comparison, it will continously check if the condition of the LAST TWO values in the total array 
+// Here is an example of where this can be confusing:
+
+// Assume you have the following values in the total array: [1, 2, 3, 4]
++ 1 // [1, 2, 3, 4, 5]
+= // (4 = 5) is false
+* 1 // [1, 2, 3, 4, 5, 5]
+= // (5 = 5) is true
+IF PRINT // Will print 5 because the condition is true
+
+// Here is an another example
+// Assume you have the following values in the total array: [1, 2, 3, 4]
++ 1 // [1, 2, 3, 4, 5]
+5 = 5 // This will not check (5 = 5)
+// Step by step: 
+// Before the = the operator is still +, therefore the array will be [1, 2, 3, 4, 5, 10] because the previous value was 5 and you add 5
+// Next the = operator will check if the last two values are equal, which is 5 and 10, which is false
+// The next value is 5, which because no operator has been set apart form =, it will be added to the array giving us [1, 2, 3, 4, 5, 10, 5]
+// The condition will now check (10 = 5) which is false
+// If you, however, wrote 5 = 10, it would be true
+
+// See conditionalExample.txt for runnable examples
 
 // ----------------------
 // Chapter 6: Loops
@@ -286,3 +328,4 @@ MEMCLEAR
 // MEMCLEAR - Clears the total array and resets the operator
 // IF - Checks if the condition is true, if it is, the code following the IF on the same line will be executed
 // FOR - Loops through a range of numbers
+// PUSH - Works like an operator. It will allow numbers to be added to the total array without having an operation applied to them
